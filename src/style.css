@@ -1,0 +1,120 @@
+:root {
+  --width: 175px;
+  --grid-gap: 1rem;
+  --height: calc(var(--width) * 1.45);
+  --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
+  --filters-width: 200px;
+  --primary: #00cc96;
+  --primary-light: #cef5ea;
+  --primary-dark: #12614c;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.movie-card {
+  display: flex;
+  width: var(--width);
+  height: var(--height);
+  transition: all 0.3s ease-out;
+  background-size: cover;
+  background-position: center -5px;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transition: all 0.2s ease-out;
+}
+
+.movie-card:hover .sidebar {
+  opacity: 1;
+  width: 32px;
+  transition: all .2s ease, opacity .05s ease;
+}
+
+.sidebar-icons {
+  opacity: 0;
+  transition: all .2s ease-out, opacity .1s ease;
+}
+
+.movie-card:hover .sidebar-icons {
+  opacity: 1;
+  /* transform: translateX(0px); */
+}
+
+.icon {
+  padding-top: 4px;
+  transform: translateX(-3px);
+  transition: all .1s ease-out, background-color .1s ease, fill .1s ease;
+}
+
+.movie-card:hover .icon {
+  transform: translateX(0px);
+  
+}
+
+.sidebar-icons .icon:hover {
+  fill: var(--primary);
+  background-color: var(--primary-light);
+  cursor: pointer;
+}
+
+.sidebar {
+  fill: var(--primary-light);
+  opacity: 0;
+  width: 0px;
+  text-align: center;
+  background-color: var(--primary);
+  margin: -1rem;
+  align-self: flex-start;
+  transition: all .2s ease, opacity .5s ease;
+}
+
+#container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: var(--filters-width) calc(100% - var(--filters-width));
+  justify-content: center;
+  align-items: space-between;
+}
+
+#filters {
+  display: grid;
+  width: var(--filters-width);
+  height: 100%;
+  min-height: 100vw;
+  background-color: var(--primary);
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--width), 1fr));
+  grid-gap: var(--grid-gap);
+  padding: 2rem;
+}
+
+#home-logo {
+  width: 100%;
+  height: 2rem;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+#home-logo:hover {
+  background-color: #bffae9;
+}
+
+#home-logo h1 {
+  margin: .4rem 0 0 0;
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  background-color: rgb(238, 255, 249);
+}

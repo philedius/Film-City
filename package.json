@@ -1,0 +1,21 @@
+{
+  "name": "movie-grid-test",
+  "description": null,
+  "version": "0.0.195",
+  "dependencies": {
+    "react-dom": "latest",
+    "react": "latest",
+    "@fortawesome/react-fontawesome": "latest",
+    "@fortawesome/fontawesome-free-solid": "latest",
+    "@fortawesome/fontawesome": "latest"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
