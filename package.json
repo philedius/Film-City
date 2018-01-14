@@ -3,11 +3,12 @@
   "description": null,
   "version": "0.0.195",
   "dependencies": {
-    "react-dom": "latest",
-    "react": "latest",
-    "@fortawesome/react-fontawesome": "latest",
+    "@fortawesome/fontawesome": "latest",
     "@fortawesome/fontawesome-free-solid": "latest",
-    "@fortawesome/fontawesome": "latest"
+    "@fortawesome/react-fontawesome": "latest",
+    "moviedb": "^0.2.10",
+    "react": "latest",
+    "react-dom": "latest"
   },
   "devDependencies": {
     "react-scripts": "1.0.0"

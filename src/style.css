@@ -1,12 +1,14 @@
 :root {
   --width: 175px;
   --grid-gap: 1rem;
-  --height: calc(var(--width) * 1.45);
+  --height: 254px;
   --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
   --filters-width: 200px;
   --primary: #00cc96;
+  --primary-transparent: rgba(0, 204, 150, .85);
   --primary-light: #cef5ea;
-  --primary-dark: #12614c;
+  --primary-lighter: #e6f7f2;
+  --primary-dark: #098665;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -17,7 +19,6 @@
   transition: all 0.3s ease-out;
   background-size: cover;
   background-position: center -5px;
-  padding: 1rem;
   box-sizing: border-box;
   flex-direction: column;
 }
@@ -32,6 +33,18 @@
   transition: all .2s ease, opacity .05s ease;
 }
 
+.sidebar {
+  fill: var(--primary-light);
+  opacity: 0;
+  width: 0px;
+  text-align: center;
+  background-color: var(--primary);
+  margin-left: -.35rem;
+  margin-top: .5rem;
+  align-self: flex-start;
+  transition: all .2s ease, opacity .5s ease;
+}
+
 .sidebar-icons {
   opacity: 0;
   transition: all .2s ease-out, opacity .1s ease;
@@ -39,7 +52,6 @@
 
 .movie-card:hover .sidebar-icons {
   opacity: 1;
-  /* transform: translateX(0px); */
 }
 
 .icon {
@@ -59,15 +71,45 @@
   cursor: pointer;
 }
 
-.sidebar {
-  fill: var(--primary-light);
+.sidebar-icons .icon:active svg {
+  transform: scale(.925);
+}
+
+.info {
   opacity: 0;
-  width: 0px;
-  text-align: center;
-  background-color: var(--primary);
-  margin: -1rem;
-  align-self: flex-start;
-  transition: all .2s ease, opacity .5s ease;
+  box-sizing: border-box;
+  background-color: var(--primary-transparent);
+  color: white;
+  width: var(--width);
+  height: var(--height);
+  position: absolute;
+  padding: .5rem;
+  transition: all .3s ease-out;
+  overflow-y: scroll;
+  cursor: default;
+}
+
+/* .movie-card:hover .info {
+  opacity: 1;
+} */
+
+.info::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+
+.info::-webkit-scrollbar-thumb {
+  background-color: var(--primary-light);
+}
+
+.info h1 {
+  margin: 0;
+  margin-top: .25rem;
+  font-size: 18px;
+}
+
+.info p {
+  font-size: 14px;
 }
 
 #container {
@@ -75,14 +117,14 @@
   width: 100%;
   grid-template-columns: var(--filters-width) calc(100% - var(--filters-width));
   justify-content: center;
-  align-items: space-between;
+  /* align-items: space-between; */
 }
 
 #filters {
   display: grid;
   width: var(--filters-width);
   height: 100%;
-  min-height: 100vw;
+  min-height: 100vh;
   background-color: var(--primary);
 }
 
