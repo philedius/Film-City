@@ -30,13 +30,17 @@
 .movie-card:hover .sidebar {
   opacity: 1;
   width: 32px;
+  transform: scaleX(1);
+  
   transition: all .2s ease, opacity .15s ease;
 }
 
 .sidebar {
   fill: var(--primary-light);
   opacity: 0;
-  width: 0px;
+  width: 32px;
+  transform: scaleX(0);
+  transform-origin: left;
   text-align: center;
   background-color: var(--primary);
   margin-left: -.35rem;
@@ -56,13 +60,13 @@
 
 .icon {
   padding-top: 4px;
-  transform: translateX(-3px);
-  transition: all .1s ease-out, background-color .1s ease, fill .1s ease;
+  transform: translateX(-3px) rotateZ(-90deg);
+  transition: all .1s ease-out, background-color .1s ease, fill .1s ease, transform .05s;
 }
 
 .movie-card:hover .icon {
-  transform: translateX(0px);
-  
+  transform: translateX(0px) rotateZ(0deg);
+  transition: transform .25s;
 }
 
 .sidebar-icons .icon:hover {
