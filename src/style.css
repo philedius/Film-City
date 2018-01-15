@@ -13,6 +13,8 @@
   box-sizing: border-box;
 }
 
+
+
 .movie-card {
   display: flex;
   width: var(--width);
@@ -21,14 +23,14 @@
   background-position: center -5px;
   box-sizing: border-box;
   flex-direction: column;
-  transition: all .3s ease; 
+  /* transition: all .5s ease-in-out;  */
   cursor: pointer;
 }
 
 .movie-card:hover .sidebar {
   opacity: 1;
   width: 32px;
-  transition: all .2s ease, opacity .05s ease;
+  transition: all .2s ease, opacity .15s ease;
 }
 
 .sidebar {
@@ -40,7 +42,7 @@
   margin-left: -.35rem;
   margin-top: .5rem;
   align-self: flex-start;
-  transition: all .2s ease, opacity .5s ease;
+  transition: all .2s ease, opacity .2s ease;
 }
 
 .sidebar-icons {
@@ -119,8 +121,7 @@
   grid-template-columns: var(--filters-width) calc(100% - var(--filters-width));
   grid-template-areas: "f g"
                        "f p";
-  justify-content: center;
-  /* align-items: space-between; */
+  justify-content: space-around;
 }
 
 #filters {
@@ -142,6 +143,8 @@
   padding: 2rem .5rem 2rem .5rem;
   align-items: flex-start;
   justify-content: center;
+  max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
+  /* max-width: var(--grid-width); */
 }
 
 #home-logo {
@@ -177,8 +180,49 @@ body {
 
 #pagination span {
   font-size: 18px;
-  margin: 0 .1rem;
+  margin: 0 .2rem;
   background-color: var(--primary);
   color: var(--primary-light);
   padding: .5rem 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media screen and (min-width: 1400px) {
+  :root {
+    --width: 220px;
+    --height: 308px;
+    --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
+  }
+
+  .movie-card {
+  background-size: cover;    
+    background-position: center -12px;
+    
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  :root {
+    --width: 270px;
+    --height: 380px;
+    --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
+  }
+
+  .movie-card {
+  background-size: cover;    
+    background-position: center -19px;
+    
+  }
+
+  .sidebar-icons {
+    transform-origin: top;
+
+  }
+
+  .movie-card:hover .sidebar {
+    opacity: 1;
+    width: 40px;
+    transition: all .2s ease, opacity .15s ease;
+  }
 }
