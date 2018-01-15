@@ -2,7 +2,7 @@
   --width: 175px;
   --grid-gap: 1rem;
   --height: 254px;
-  --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
+  --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 6);
   --filters-width: 200px;
   --primary: #00cc96;
   --primary-transparent: rgba(0, 204, 150, .85);
@@ -19,8 +19,8 @@
   display: flex;
   width: var(--width);
   height: var(--height);
-  background-size: cover;
   background-position: center -5px;
+  background-size: cover;
   box-sizing: border-box;
   flex-direction: column;
   /* transition: all .5s ease-in-out;  */
@@ -60,12 +60,12 @@
 
 .icon {
   padding-top: 4px;
-  transform: translateX(-3px) rotateZ(-90deg);
+  transform: translateX(-3px);
   transition: all .1s ease-out, background-color .1s ease, fill .1s ease, transform .05s;
 }
 
 .movie-card:hover .icon {
-  transform: translateX(0px) rotateZ(0deg);
+  transform: translateX(0px);
   transition: transform .25s;
 }
 
@@ -123,14 +123,16 @@
   display: grid;
   width: 100%;
   grid-template-columns: var(--filters-width) calc(100% - var(--filters-width));
-  grid-template-areas: "f g"
-                       "f p";
+  grid-template-areas: "filters header" 
+                       "filters moviegrid"
+                       "filters pagination"
+                       "filters footer";
   justify-content: space-around;
 }
 
 #filters {
   display: grid;
-  grid-area: f;
+  grid-area: filters;
   width: var(--filters-width);
   height: 100%;
   min-height: 100vh;
@@ -139,7 +141,7 @@
 
 #grid {
   display: grid;
-  grid-area: g;  
+  grid-area: moviegrid;  
   grid-template-columns: repeat(auto-fit, minmax(var(--width), 1fr));
   grid-template-columns: repeat(auto-fit, var(--width));
   grid-template-rows: repeat(auto-fit, var(--height));
@@ -147,8 +149,6 @@
   padding: 2rem .5rem 2rem .5rem;
   align-items: flex-start;
   justify-content: center;
-  max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
-  /* max-width: var(--grid-width); */
 }
 
 #home-logo {
@@ -178,8 +178,9 @@ body {
 }
 
 #pagination {
-  grid-area: p;
+  grid-area: pagination;
   margin-left: 2rem;
+  padding: .5rem 1rem;
 }
 
 #pagination span {
@@ -194,14 +195,14 @@ body {
 
 @media screen and (min-width: 1400px) {
   :root {
-    --width: 220px;
-    --height: 308px;
+    --width: 210px;
+    --height: 294px;
     --grid-max-width: calc(calc(var(--width) + var(--grid-gap)) * 5);
   }
 
   .movie-card {
-  background-size: cover;    
     background-position: center -12px;
+  background-size: cover;    
     
   }
 }
@@ -214,8 +215,8 @@ body {
   }
 
   .movie-card {
-  background-size: cover;    
     background-position: center -19px;
+  background-size: cover;    
     
   }
 

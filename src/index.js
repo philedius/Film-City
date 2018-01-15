@@ -11,8 +11,8 @@ var results = [];
 // });
 
 function getPage(page = 1) {
+  let today = new Date().toISOString().substr(0, 10);
   mdb.discoverMovie({ page: page }, (err, res) => {
-    console.log(res);
     results = res.results;
     render(<App />, document.getElementById('root'));
     window.scrollTo(0, 0);
@@ -53,4 +53,4 @@ const App = () => (
   </div>
 );
 
-getPage(2);
+getPage(1);
