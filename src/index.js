@@ -38,18 +38,19 @@ const Filters = () => (
 
 const App = () => (
   <div id="container">
-  <Filters />
-  <MovieGrid movies={results} />
-  <div id="pagination">
-    <span onClick={(e) => getPage(1)}>1</span>
-    <span onClick={(e) => getPage(2)}>2</span>
-    <span onClick={(e) => getPage(3)}>3</span>
-    <span onClick={(e) => getPage(4)}>4</span>
-    <span onClick={(e) => getPage(5)}>5</span>
-    <span onClick={(e) => getPage(6)}>6</span>
-    <span onClick={(e) => getPage(7)}>7</span>
-    <span onClick={(e) => getPage(8)}>8</span>
-  </div>
+    <div id="header"></div>
+    <Filters />
+    <MovieGrid movies={results} />
+    <div id="pagination">
+      <span onClick={(e) => getPage(1)}>1</span>
+      <span onClick={(e) => getPage(2)}>2</span>
+      <span onClick={(e) => getPage(3)}>3</span>
+      <span onClick={(e) => getPage(4)}>4</span>
+      <span onClick={(e) => getPage(5)}>5</span>
+      <span onClick={(e) => getPage(6)}>6</span>
+      <span onClick={(e) => getPage(7)}>7</span>
+      <span onClick={(e) => getPage(8)}>8</span>
+    </div>
   </div>
 );
 
