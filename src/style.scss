@@ -1,0 +1,206 @@
+$width: 10vw;
+$min-width: 130px;
+$height: $width * 1.45;
+$min-height: $min-width * 1.45;
+$grid-gap: 1.5rem;
+$filters-width: 250px;
+$primary: hsl(200, 70, 50);
+$light: #fafafa;
+$secondary: #EDEBFA;
+$primary-dark: adjust-hue(desaturate($primary, 30%), 15deg);
+$filters: $primary;
+$font-color: lighten($primary, 45%);
+$grid-background-color: change-color($color: $primary, $saturation: 30%, $lightness: 98%);
+$header-height: 70px;
+
+:root {
+  font-family: 'Roboto Condensed', sans-serif;
+  box-sizing: border-box;
+}
+
+.movie-card {
+  display: flex;
+  width: $width;
+  height: $height;
+  min-width: $min-width;
+  min-height: $min-height;
+  background-position: center;
+  background-size: cover;
+  box-sizing: border-box;
+  flex-direction: column;
+  cursor: pointer;
+  box-shadow: 0 0px 25px change-color($color: darken($primary, 10%), $alpha: .3);
+}
+
+.movie-card:hover .sidebar {
+  opacity: 1;
+  width: 32px;
+  transform: scaleX(1);
+  transition: all .15s ease, opacity 0s ease;
+}
+
+.sidebar {
+  fill: $light;
+  opacity: 0;
+  width: 32px;
+  transform: scaleX(.5);
+  transform-origin: left;
+  text-align: center;
+  background-color: $primary;
+  margin-left: -.5rem;
+  margin-top: 1.5rem;
+  align-self: flex-start;
+  transition: all 1s ease, opacity .125s ease;
+}
+
+.sidebar-icons {
+  opacity: 0;
+  transition: all .2s ease-out, opacity .1s ease;
+}
+
+.movie-card:hover .sidebar-icons {
+  opacity: 1;
+}
+
+.icon {
+  padding-top: 4px;
+  transform: translateX(-3px);
+  transition: all .1s ease-out, background-color .1s ease, fill .1s ease, transform .05s;
+}
+
+.movie-card:hover .icon {
+  transform: translateX(0px);
+  transition: transform .25s;
+}
+
+.sidebar-icons .icon:hover {
+  fill: $primary;
+  background-color: $light;
+  cursor: pointer;
+}
+
+.sidebar-icons .icon:active svg {
+  transform: scale(.925);
+}
+
+/* Hmmmm */
+.info {
+  opacity: 0;
+  display: none;
+  box-sizing: border-box;
+  background-color: $primary;
+  color: white;
+  width: $width;
+  height: $height;
+  position: absolute;
+  padding: .5rem;
+  transition: opacity .3s ease-out, display 0s;
+  overflow-y: scroll;
+  cursor: default;
+}
+
+.info::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+
+.info::-webkit-scrollbar-thumb {
+  background-color: $light;
+}
+
+.info h1 {
+  margin: 0;
+  margin-top: .25rem;
+  font-size: 18px;
+}
+
+.info p {
+  font-size: 14px;
+}
+
+#container {
+  display: grid;
+  // width: 100vw;
+  grid-template-columns: $filters-width 1fr;
+  grid-template-areas: "header header" 
+                       "filters moviegrid"
+                       "filters pagination"
+                       "filters footer";
+  justify-content: space-around;
+}
+
+#header {
+  grid-area: header;
+  box-sizing: border-box;
+  border-top: 5px solid $primary;
+  background-color: white;
+  height: $header-height;
+}
+
+#filters {
+  display: grid;
+  grid-area: filters;
+  width: $filters-width;
+  height: calc(100vh - #{$header-height});
+  background-color: $primary;
+  color: $font-color;
+}
+
+#filter-components {
+  margin: 1rem;
+}
+
+#grid {
+  display: grid;
+  grid-area: moviegrid;
+  grid-template-columns: repeat(auto-fit, $width);
+  grid-gap: $grid-gap;
+  align-items: flex-start;
+  margin: $grid-gap;
+}
+
+#home-logo {
+  width: 100%;
+  height: 2rem;
+  background-color: $light;
+  color: $primary-dark;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+#home-logo:hover {
+  background-color: #bffae9;
+}
+
+#home-logo h1 {
+  margin: .4rem 0 0 0;
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $grid-background-color;
+}
+
+#pagination {
+  grid-area: pagination;
+  margin: $grid-gap;
+}
+
+#pagination span {
+  font-size: 18px;
+  margin: 0 .2rem;
+  background-color: $primary;
+  color: $light;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width: 1250px) {
+  #grid {
+    grid-template-columns: repeat(auto-fit, $min-width);
+  }
+}

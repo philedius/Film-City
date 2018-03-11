@@ -4,11 +4,6 @@ import MovieCard from './MovieCard';
 import './style.css';
 const mdb = require('moviedb')('3390228324e8a091fabebee2d57020a4');
 var results = [];
-// mdb.discoverMovie({ page: 1 }, (err, res) => {
-//   console.log(res);
-//   results = res.results;
-//   render(<App />, document.getElementById('root'));
-// });
 
 function getPage(page = 1) {
   let today = new Date().toISOString().substr(0, 10);
@@ -33,12 +28,19 @@ function MovieGrid(props) {
 
 const Filters = () => (
   <div id="filters">
+    <div id="filter-components">
+      <h3>Released in</h3>
+      <h3>Minimum score</h3>
+      <h3>Genres</h3>
+    </div>
   </div>
 )
 
 const App = () => (
   <div id="container">
-    <div id="header"></div>
+    <div id="header">
+      <input type="search" />
+    </div>
     <Filters />
     <MovieGrid movies={results} />
     <div id="pagination">
