@@ -9,6 +9,7 @@ function getPage(page = 1) {
   let today = new Date().toISOString().substr(0, 10);
   mdb.discoverMovie({ page: page }, (err, res) => {
     results = res.results;
+    console.log(res);
     render(<App />, document.getElementById('root'));
     window.scrollTo(0, 0);
   });
@@ -39,7 +40,7 @@ const Filters = () => (
 const App = () => (
   <div id="container">
     <div id="header">
-      <input type="search" />
+      <input id="search" type="search" placeholder="Search for movies, actors / actresses, genres ..." />
     </div>
     <Filters />
     <MovieGrid movies={results} />

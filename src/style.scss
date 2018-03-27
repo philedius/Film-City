@@ -1,20 +1,21 @@
-$width: 10vw;
+$width: 14vw;
 $min-width: 130px;
 $height: $width * 1.45;
 $min-height: $min-width * 1.45;
 $grid-gap: 1.5rem;
 $filters-width: 250px;
-$primary: hsl(200, 70, 50);
+$primary: hsl(180, 70, 45);
 $light: #fafafa;
 $secondary: #EDEBFA;
 $primary-dark: adjust-hue(desaturate($primary, 30%), 15deg);
 $filters: $primary;
 $font-color: lighten($primary, 45%);
 $grid-background-color: change-color($color: $primary, $saturation: 30%, $lightness: 98%);
-$header-height: 70px;
+$header-height: 100px;
+$font-family: 'Open Sans', sans-serif;
 
 :root {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: $font-family;
   box-sizing: border-box;
 }
 
@@ -34,28 +35,27 @@ $header-height: 70px;
 
 .movie-card:hover .sidebar {
   opacity: 1;
-  width: 32px;
-  transform: scaleX(1);
-  transition: all .15s ease, opacity 0s ease;
+  width: 36px;
+  transform: scale(1, 1);
 }
 
 .sidebar {
   fill: $light;
   opacity: 0;
-  width: 32px;
-  transform: scaleX(.5);
+  width: 36px;
+  transform: scale(.25, .8);
   transform-origin: left;
   text-align: center;
   background-color: $primary;
-  margin-left: -.5rem;
-  margin-top: 1.5rem;
-  align-self: flex-start;
-  transition: all 1s ease, opacity .125s ease;
+  margin-right: -18px;
+  margin-top: 46%;
+  align-self: flex-end;
+  transition: all 0.2s ease, opacity .15s ease-out;
+  box-shadow: 0 0 15px change-color($color: darken($primary, 10%), $alpha: .3);
 }
 
 .sidebar-icons {
   opacity: 0;
-  transition: all .2s ease-out, opacity .1s ease;
 }
 
 .movie-card:hover .sidebar-icons {
@@ -64,14 +64,8 @@ $header-height: 70px;
 
 .icon {
   padding-top: 4px;
-  transform: translateX(-3px);
-  transition: all .1s ease-out, background-color .1s ease, fill .1s ease, transform .05s;
 }
 
-.movie-card:hover .icon {
-  transform: translateX(0px);
-  transition: transform .25s;
-}
 
 .sidebar-icons .icon:hover {
   fill: $primary;
@@ -122,32 +116,53 @@ $header-height: 70px;
   display: grid;
   // width: 100vw;
   grid-template-columns: $filters-width 1fr;
-  grid-template-areas: "header header" 
+  grid-template-areas: "filters header" 
                        "filters moviegrid"
                        "filters pagination"
                        "filters footer";
-  justify-content: space-around;
+  // justify-content: space-around;
 }
 
 #header {
   grid-area: header;
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
-  border-top: 5px solid $primary;
-  background-color: white;
+  background-color: transparent;
   height: $header-height;
+}
+
+#search {
+  font-family: $font-family;
+  width: 50%;
+  padding: 1rem;
+  margin-left: 2rem;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: none;
+  background-color: white;
+  border-left: 4px solid $primary;
+  box-shadow: 0 0 25px change-color($color: darken($primary, 10%), $alpha: .1);
 }
 
 #filters {
   display: grid;
   grid-area: filters;
   width: $filters-width;
-  height: calc(100vh - #{$header-height});
+  height: 100%;
   background-color: $primary;
   color: $font-color;
+  box-shadow: 0 0 25px change-color($color: darken($primary, 10%), $alpha: .2);
 }
 
 #filter-components {
   margin: 1rem;
+}
+
+#filter-components h3 {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 2px;
 }
 
 #grid {
@@ -155,8 +170,11 @@ $header-height: 70px;
   grid-area: moviegrid;
   grid-template-columns: repeat(auto-fit, $width);
   grid-gap: $grid-gap;
-  align-items: flex-start;
-  margin: $grid-gap;
+  padding: $grid-gap * 2;
+  padding-top: $grid-gap;
+  // margin: $grid-gap * 2;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 #home-logo {
