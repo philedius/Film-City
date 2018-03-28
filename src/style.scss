@@ -134,9 +134,10 @@ $font-family: 'Open Sans', sans-serif;
 
 #search {
   font-family: $font-family;
-  width: 50%;
+  width: 100%;
   padding: 1rem;
-  margin-left: 2rem;
+  margin-left: $grid-gap * 2;
+  margin-right: $grid-gap * 2;
   font-size: 16px;
   box-sizing: border-box;
   border: none;
@@ -217,8 +218,48 @@ body {
   user-select: none;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 960px) {
+  $width: 18vw;
+  $height: $width * 1.45;
+
+  #container {
+    display: block;
+  }
+
+  #filters {
+    display: none;
+  }
+
   #grid {
-    grid-template-columns: repeat(auto-fit, $min-width);
+    grid-template-columns: repeat(auto-fit, $width);
+    padding: $grid-gap;
+  }
+
+  .movie-card {
+    width: $width;
+    height: $height;
+  }
+}
+
+@media (max-width: 620px) {
+  $width: 30vw;
+  $height: $width * 1.45;
+
+  #container {
+    display: block;
+  }
+
+  #filters {
+    display: none;
+  }
+
+  #grid {
+    grid-template-columns: repeat(auto-fit, $width);
+    padding: $grid-gap;
+  }
+
+  .movie-card {
+    width: $width;
+    height: $height;
   }
 }
