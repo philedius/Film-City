@@ -3,8 +3,9 @@ $min-width: 130px;
 $height: $width * 1.45;
 $min-height: $min-width * 1.45;
 $grid-gap: 1.5rem;
+$icon-size: 36px;
 $filters-width: 250px;
-$primary: hsl(180, 70, 45);
+$primary: hsl(170, 80, 45);
 $light: #fafafa;
 $secondary: #EDEBFA;
 $primary-dark: adjust-hue(desaturate($primary, 30%), 15deg);
@@ -21,6 +22,7 @@ $font-family: 'Open Sans', sans-serif;
 
 .movie-card {
   display: flex;
+  justify-content: flex-start;
   width: $width;
   height: $height;
   min-width: $min-width;
@@ -31,41 +33,56 @@ $font-family: 'Open Sans', sans-serif;
   flex-direction: column;
   cursor: pointer;
   box-shadow: 0 0px 25px change-color($color: darken($primary, 10%), $alpha: .3);
+  transition: width .3s ease, height .3s ease;
+  transition-delay: width .05s, height .05s;
 }
 
 .movie-card:hover .sidebar {
   opacity: 1;
-  width: 36px;
+  width: $icon-size;
   transform: scale(1, 1);
-}
-
-.sidebar {
-  fill: $light;
-  opacity: 0;
-  width: 36px;
-  transform: scale(.25, .8);
-  transform-origin: left;
-  text-align: center;
-  background-color: $primary;
-  margin-right: -18px;
-  margin-top: 46%;
-  align-self: flex-end;
-  transition: all 0.2s ease, opacity .15s ease-out;
-  box-shadow: 0 0 15px change-color($color: darken($primary, 10%), $alpha: .3);
-}
-
-.sidebar-icons {
-  opacity: 0;
 }
 
 .movie-card:hover .sidebar-icons {
   opacity: 1;
 }
 
-.icon {
-  padding-top: 4px;
+.sidebar {
+  fill: $light;
+  opacity: 0;
+  width: $icon-size;
+  min-width: 36px;
+  transform: scale(.25, .8);
+  margin-right: -($icon-size / 2);
+  margin-top: $icon-size / 2;
+  transform-origin: left;
+  text-align: center;
+  background-color: $primary;
+  align-self: flex-end;
+  transition: all 0.25s cubic-bezier(0, 0, 0.54, 1.10), opacity .15s ease-out;
+  box-shadow: 0 0 15px change-color($color: darken($primary, 10%), $alpha: .3);
 }
 
+.sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  opacity: 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: $icon-size;
+  height: $icon-size;
+  min-width: 36px;
+  min-height: 36px;
+}
+.icon svg {
+  transition: transform 0.2s cubic-bezier(0, 0, 0.54, 2)
+}
 
 .sidebar-icons .icon:hover {
   fill: $primary;
@@ -74,7 +91,8 @@ $font-family: 'Open Sans', sans-serif;
 }
 
 .sidebar-icons .icon:active svg {
-  transform: scale(.925);
+  transform: scale(.9);
+  transition: transform 0.1s ease;
 }
 
 /* Hmmmm */
@@ -118,8 +136,6 @@ $font-family: 'Open Sans', sans-serif;
   grid-template-columns: $filters-width 1fr;
   grid-template-areas: "filters header" 
                        "filters moviegrid"
-                       "filters pagination"
-                       "filters footer";
   // justify-content: space-around;
 }
 

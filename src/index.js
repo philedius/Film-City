@@ -1,30 +1,73 @@
+// TODO: SHIT BE GETTING PAGES ALL WRONG
+
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from './MovieCard';
 import './style.css';
 const mdb = require('moviedb')('3390228324e8a091fabebee2d57020a4');
-var results = [];
+let results = [];
+let totalItems = [];
+let currentPage = 1;
 
-function getPage(page = 1) {
+function getPage(page) {
   let today = new Date().toISOString().substr(0, 10);
-  mdb.discoverMovie({ page: page }, (err, res) => {
+  
+  mdb.discoverMovie({ page: page, include_adult: false }, (err, res) => {
     results = res.results;
     console.log(res);
     render(<App />, document.getElementById('root'));
-    window.scrollTo(0, 0);
   });
 }
 
 function MovieGrid(props) {
   const movies = props.movies;
-  const gridItems = movies.map((movie) =>
-    <MovieCard movie={movie} />
-  );
+  let gridItems = movies.map((movie) => <MovieCard key={movie.id} movie={movie} /> );
+  totalItems = totalItems.concat(gridItems);
+  console.log(currentPage);
   return (
+    <InfiniteScroll
+      pageStart={currentPage}
+      loadMore={getPage}
+      // initialLoad={true}
+      hasMore={true || false}
+      threshold={100}
+      // useCapture={true}
+      loader={<div className="loader" key={0}>Loading ...</div>}
+    >  
     <div id="grid">
-      {gridItems}
-    </div>
+        {totalItems}
+      </div>
+    </InfiniteScroll>
   )
+}
+
+
+const App = () => (
+  <Router>
+    <div>
+      <Route exact path="/" component={Home} />
+      <Route path="/movie/:movieId" component={MoviePage} />
+    </div>
+  </Router>
+);
+
+const MoviePage = ({match}) => (
+  <h1>{match.params.movieId}</h1>
+);
+
+function Home(props) {
+  currentPage += 1;
+  return (
+    <div id="container">
+        <div id="header">
+          <input id="search" placeholder="Search for movies, actors / actresses, genres ..." />
+        </div>
+        <Filters />
+        <MovieGrid movies={results} />
+      </div>
+  );
 }
 
 const Filters = () => (
@@ -36,25 +79,6 @@ const Filters = () => (
     </div>
   </div>
 )
+// render(<App />, document.getElementById('root'));
 
-const App = () => (
-  <div id="container">
-    <div id="header">
-      <input id="search" type="search" placeholder="Search for movies, actors / actresses, genres ..." />
-    </div>
-    <Filters />
-    <MovieGrid movies={results} />
-    <div id="pagination">
-      <span onClick={(e) => getPage(1)}>1</span>
-      <span onClick={(e) => getPage(2)}>2</span>
-      <span onClick={(e) => getPage(3)}>3</span>
-      <span onClick={(e) => getPage(4)}>4</span>
-      <span onClick={(e) => getPage(5)}>5</span>
-      <span onClick={(e) => getPage(6)}>6</span>
-      <span onClick={(e) => getPage(7)}>7</span>
-      <span onClick={(e) => getPage(8)}>8</span>
-    </div>
-  </div>
-);
-
-getPage(1);
+if (currentPage === 1) getPage(currentPage);
