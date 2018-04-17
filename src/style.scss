@@ -1,4 +1,4 @@
-$width: 14vw;
+$width: 11vw;
 $min-width: 130px;
 $height: $width * 1.45;
 $min-height: $min-width * 1.45;
@@ -6,18 +6,33 @@ $grid-gap: 1.5rem;
 $icon-size: 36px;
 $filters-width: 250px;
 $primary: hsl(170, 80, 45);
+// $primary: hsl(190, 80, 45);
+$primary-transparent: transparentize($primary, .2);
 $light: #fafafa;
 $secondary: #EDEBFA;
 $primary-dark: adjust-hue(desaturate($primary, 30%), 15deg);
-$filters: $primary;
+$filters: $light;
 $font-color: lighten($primary, 45%);
-$grid-background-color: change-color($color: $primary, $saturation: 30%, $lightness: 98%);
+$background-color: $light;
 $header-height: 100px;
 $font-family: 'Open Sans', sans-serif;
 
 :root {
   font-family: $font-family;
   box-sizing: border-box;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    color: $light;
+    padding: 1rem 2rem;
+    text-align: center;
+    background: $primary;
+  }
 }
 
 .movie-card {
@@ -32,7 +47,7 @@ $font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
   flex-direction: column;
   cursor: pointer;
-  box-shadow: 0 0px 25px change-color($color: darken($primary, 10%), $alpha: .3);
+  box-shadow: 0 0px 25px rgba(0, 0, 0, 0.1);
   transition: width .3s ease, height .3s ease;
   transition-delay: width .05s, height .05s;
 }
@@ -48,7 +63,8 @@ $font-family: 'Open Sans', sans-serif;
 }
 
 .sidebar {
-  fill: $light;
+  fill: #222;
+  color: #222;
   opacity: 0;
   width: $icon-size;
   min-width: 36px;
@@ -57,10 +73,10 @@ $font-family: 'Open Sans', sans-serif;
   margin-top: $icon-size / 2;
   transform-origin: left;
   text-align: center;
-  background-color: $primary;
+  background-color: $light;
   align-self: flex-end;
   transition: all 0.25s cubic-bezier(0, 0, 0.54, 1.10), opacity .15s ease-out;
-  box-shadow: 0 0 15px change-color($color: darken($primary, 10%), $alpha: .3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-icons {
@@ -69,6 +85,11 @@ $font-family: 'Open Sans', sans-serif;
   align-items: center;
   justify-content: space-around;
   opacity: 0;
+}
+
+.sidebar-icons a:visited,
+.sidebar-icons a-webkit-any-link:visited {
+  fill: #222 !important;
 }
 
 .icon {
@@ -132,11 +153,9 @@ $font-family: 'Open Sans', sans-serif;
 
 #container {
   display: grid;
-  // width: 100vw;
   grid-template-columns: $filters-width 1fr;
   grid-template-areas: "filters header" 
                        "filters moviegrid"
-  // justify-content: space-around;
 }
 
 #header {
@@ -158,8 +177,14 @@ $font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
   border: none;
   background-color: white;
-  border-left: 4px solid $primary;
-  box-shadow: 0 0 25px change-color($color: darken($primary, 10%), $alpha: .1);
+  box-shadow: 0 1px 25px rgba(0, 0, 0, 0.05);
+  transition: transform .15s ease-out, box-shadow .3s ease-out;
+}
+
+#search:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 35px rgba(0, 0, 0, 0.1);
 }
 
 #filters {
@@ -167,9 +192,9 @@ $font-family: 'Open Sans', sans-serif;
   grid-area: filters;
   width: $filters-width;
   height: 100%;
-  background-color: $primary;
-  color: $font-color;
-  box-shadow: 0 0 25px change-color($color: darken($primary, 10%), $alpha: .2);
+  background-color: white;
+  color: #444;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.04);
 }
 
 #filter-components {
@@ -216,7 +241,7 @@ $font-family: 'Open Sans', sans-serif;
 body {
   margin: 0;
   padding: 0;
-  background-color: $grid-background-color;
+  background-color: $background-color;
 }
 
 #pagination {
@@ -232,6 +257,82 @@ body {
   padding: .5rem 1rem;
   cursor: pointer;
   user-select: none;
+}
+
+.movie-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-backdrop {
+  display: flex;
+  justify-content: center;
+  background: $background-color;
+  color: white;
+  width: 100vw;
+  height: 550px;
+  background-size: cover;
+  background-position: 0 30%;
+}
+
+.movie-backdrop-gradient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: $primary-transparent;
+}
+
+.movie-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 900px;
+}
+
+.movie-title {
+  width: 100%;
+  background: $light;
+  color: #444;
+  align-self: flex-end;
+  text-align: center;
+}
+
+.movie-text-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: $grid-gap;
+  max-width: 600px;
+  color: white;
+  line-height: 1.5;
+  text-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
+}
+
+.movie-text-info h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.movie-overview {
+  display: flex;
+}
+
+.movie-poster {
+  width: 250px;
+  min-width: 250px;
+  height: calc(250px * 1.45);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 3px 20px change-color($color: darken($primary, 10%), $alpha: .5);
+  margin-right: 2rem;
+}
+
+.release-year {
+  margin-left: 1rem;
+  font-size: .75em;
 }
 
 @media (max-width: 960px) {

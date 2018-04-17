@@ -7,12 +7,17 @@ import './style.css';
 const mdb = require('moviedb')('3390228324e8a091fabebee2d57020a4');
 let results = [];
 let totalItems = [];
+const discoverMovie = mdb.discoverMovie;
+
+mdb.configuration((error, response) => {
+  window.config = response;
+  console.log(window.config);
+})
 
 // TODO: keep items between going from MoviePage to Home
 class MovieGrid extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentPage: 1,
     }
@@ -23,19 +28,19 @@ class MovieGrid extends React.Component {
     this.allItems = [];
     this.currentItems = [];
   }
-
-  componentWillUnmount() {
-    
-  }
   
   getPage() {
-    let today = new Date().toISOString().substr(0, 10);
-    mdb.discoverMovie({ page: this.state.currentPage, include_adult: false }, (err, res) => {
-      this.currentItems = res.results;
-      console.log(res);
-      this.incrementPage();
-      this.updateGrid();
+    let hehe = mdb.discoverMovie({ primary_release_year: 2016, page: this.state.currentPage, include_adult: false }, (error, response) => {
+      if (!error) {
+        console.log(response);
+        this.currentItems = response.results;
+        this.incrementPage();
+        this.updateGrid();
+      } else {
+        console.error(error);
+      }
     });
+    console.log(hehe);
   }
   
   incrementPage() {
@@ -56,8 +61,8 @@ class MovieGrid extends React.Component {
         loadMore={() => {(this.getPage())}}
         initialLoad={true}
         hasMore={true || false}
-        threshold={50}
-        loader={<div className="loader" key={0}>Loading ...</div>}
+        threshold={500}
+        loader={<div className="loader" key={0}><h1>Loading</h1></div>}
       >  
       <div id="grid">
           {this.allItems}
@@ -87,20 +92,43 @@ class App extends React.Component {
 class MoviePage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: '',
+      score: '',
+      overview: '',
+    };
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.movieId);
     mdb.movieInfo({ id: this.props.match.params.movieId }, (error, response) => {
       console.log(response);
-      this.props.poop = response.adult;
+      this.setState({
+        title: response.original_title,
+        score: response.vote_average,
+        overview: response.overview,
+        backdrop: window.config.images.base_url + window.config.images.backdrop_sizes[3] + response.backdrop_path,
+        poster: window.config.images.base_url + window.config.images.poster_sizes[3] + response.poster_path,
+        releaseYear: response.release_date.substring(0, 4)
+      });
     });
   }
   
   render() {
-    return (
-      <h1>hello</h1>
-    )
+        return (
+          <div className="movie-container">
+            <div className="movie-backdrop" style={{backgroundImage: `url(${this.state.backdrop})`}}>
+                <div className="movie-backdrop-gradient">
+                <div className="movie-info-container">
+                  <div className="movie-poster" style={{backgroundImage: `url(${this.state.poster})`}}></div>
+                  <div className="movie-text-info">
+                    <h1>{this.state.title}<span className="release-year">({this.state.releaseYear})</span></h1>
+                    <div className="movie-overview"><p>{this.state.overview}</p></div>
+                  </div>
+                </div>
+                </div>
+              </div>
+          </div>
+        )
   }
 }
 
@@ -114,7 +142,7 @@ class Home extends React.Component {
     return (
       <div id="container">
           <div id="header">
-            <input id="search" placeholder="Search for movies, actors / actresses, genres ..." />
+            <input id="search" autoComplete="false" placeholder="Search for movies, actors / actresses, genres ..." />
           </div>
           <Filters />
           <MovieGrid />

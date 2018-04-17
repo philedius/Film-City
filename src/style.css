@@ -2,11 +2,21 @@
   font-family: "Open Sans", sans-serif;
   box-sizing: border-box; }
 
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .loader h1 {
+    color: #fafafa;
+    padding: 1rem 2rem;
+    text-align: center;
+    background: #17cfb0; }
+
 .movie-card {
   display: flex;
   justify-content: flex-start;
-  width: 14vw;
-  height: 20.3vw;
+  width: 11vw;
+  height: 15.95vw;
   min-width: 130px;
   min-height: 188.5px;
   background-position: center;
@@ -14,7 +24,7 @@
   box-sizing: border-box;
   flex-direction: column;
   cursor: pointer;
-  box-shadow: 0 0px 25px rgba(18, 161, 137, 0.3);
+  box-shadow: 0 0px 25px rgba(0, 0, 0, 0.1);
   transition: width .3s ease, height .3s ease;
   transition-delay: width .05s, height .05s; }
 
@@ -27,7 +37,8 @@
   opacity: 1; }
 
 .sidebar {
-  fill: #fafafa;
+  fill: #222;
+  color: #222;
   opacity: 0;
   width: 36px;
   min-width: 36px;
@@ -36,10 +47,10 @@
   margin-top: 18px;
   transform-origin: left;
   text-align: center;
-  background-color: #17cfb0;
+  background-color: #fafafa;
   align-self: flex-end;
   transition: all 0.25s cubic-bezier(0, 0, 0.54, 1.1), opacity 0.15s ease-out;
-  box-shadow: 0 0 15px rgba(18, 161, 137, 0.3); }
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); }
 
 .sidebar-icons {
   display: flex;
@@ -47,6 +58,10 @@
   align-items: center;
   justify-content: space-around;
   opacity: 0; }
+
+.sidebar-icons a:visited,
+.sidebar-icons a-webkit-any-link:visited {
+  fill: #222 !important; }
 
 .icon {
   display: flex;
@@ -76,8 +91,8 @@
   box-sizing: border-box;
   background-color: #17cfb0;
   color: white;
-  width: 14vw;
-  height: 20.3vw;
+  width: 11vw;
+  height: 15.95vw;
   position: absolute;
   padding: .5rem;
   transition: opacity .3s ease-out, display 0s;
@@ -102,7 +117,7 @@
 #container {
   display: grid;
   grid-template-columns: 250px 1fr;
-  grid-template-areas: "filters header" "filters moviegrid"; }
+  grid-template-areas: "filters header"  "filters moviegrid"; }
 
 #header {
   grid-area: header;
@@ -122,17 +137,22 @@
   box-sizing: border-box;
   border: none;
   background-color: white;
-  border-left: 4px solid #17cfb0;
-  box-shadow: 0 0 25px rgba(18, 161, 137, 0.1); }
+  box-shadow: 0 1px 25px rgba(0, 0, 0, 0.05);
+  transition: transform .15s ease-out, box-shadow .3s ease-out; }
+
+#search:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 35px rgba(0, 0, 0, 0.1); }
 
 #filters {
   display: grid;
   grid-area: filters;
   width: 250px;
   height: 100%;
-  background-color: #17cfb0;
-  color: #d1faf3;
-  box-shadow: 0 0 25px rgba(18, 161, 137, 0.2); }
+  background-color: white;
+  color: #444;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.04); }
 
 #filter-components {
   margin: 1rem; }
@@ -145,7 +165,7 @@
 #grid {
   display: grid;
   grid-area: moviegrid;
-  grid-template-columns: repeat(auto-fit, 14vw);
+  grid-template-columns: repeat(auto-fit, 11vw);
   grid-gap: 1.5rem;
   padding: 3rem;
   padding-top: 1.5rem;
@@ -171,7 +191,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f8fbfb; }
+  background-color: #fafafa; }
 
 #pagination {
   grid-area: pagination;
@@ -185,6 +205,72 @@ body {
   padding: .5rem 1rem;
   cursor: pointer;
   user-select: none; }
+
+.movie-container {
+  display: flex;
+  flex-direction: column; }
+
+.movie-backdrop {
+  display: flex;
+  justify-content: center;
+  background: #fafafa;
+  color: white;
+  width: 100vw;
+  height: 550px;
+  background-size: cover;
+  background-position: 0 30%; }
+
+.movie-backdrop-gradient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(23, 207, 176, 0.8); }
+
+.movie-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 900px; }
+
+.movie-title {
+  width: 100%;
+  background: #fafafa;
+  color: #444;
+  align-self: flex-end;
+  text-align: center; }
+
+.movie-text-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  max-width: 600px;
+  color: white;
+  line-height: 1.5;
+  text-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1); }
+
+.movie-text-info h1 {
+  font-size: 24px;
+  margin: 0; }
+
+.movie-overview {
+  display: flex; }
+
+.movie-poster {
+  width: 250px;
+  min-width: 250px;
+  height: calc(250px * 1.45);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 3px 20px rgba(18, 161, 137, 0.5);
+  margin-right: 2rem; }
+
+.release-year {
+  margin-left: 1rem;
+  font-size: .75em; }
 
 @media (max-width: 960px) {
   #container {
