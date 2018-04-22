@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "latest",
     "moviedb": "^0.2.10",
     "node-sass-chokidar": "^1.1.0",
+    "node-vibrant": "^3.0.0",
     "npm-run-all": "^4.1.2",
     "react": "latest",
     "react-dom": "latest",

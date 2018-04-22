@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from './MovieCard';
 import './style.css';
+const Vibrant = require('node-vibrant');
 const mdb = require('moviedb')('3390228324e8a091fabebee2d57020a4');
 let results = [];
 let totalItems = [];
@@ -30,9 +31,8 @@ class MovieGrid extends React.Component {
   }
   
   getPage() {
-    let hehe = mdb.discoverMovie({ primary_release_year: 2016, page: this.state.currentPage, include_adult: false }, (error, response) => {
+    let hehe = mdb.discoverMovie({ page: this.state.currentPage, include_adult: false }, (error, response) => {
       if (!error) {
-        console.log(response);
         this.currentItems = response.results;
         this.incrementPage();
         this.updateGrid();
@@ -40,7 +40,6 @@ class MovieGrid extends React.Component {
         console.error(error);
       }
     });
-    console.log(hehe);
   }
   
   incrementPage() {
@@ -92,6 +91,7 @@ class App extends React.Component {
 class MoviePage extends React.Component {
   constructor(props) {
     super(props);
+    this.color = 'rgba(0, 0, 0, 0.5)'
     this.state = {
       title: '',
       score: '',
@@ -102,6 +102,14 @@ class MoviePage extends React.Component {
   componentDidMount() {
     mdb.movieInfo({ id: this.props.match.params.movieId }, (error, response) => {
       console.log(response);
+      
+      Vibrant.from(window.config.images.base_url + window.config.images.backdrop_sizes[3] + response.backdrop_path).getPalette((err, palette) => {
+        console.log(palette);
+        this.setState({
+          backdropColor: `rgba(${Math.floor(palette.Vibrant.r)}, ${Math.floor(palette.Vibrant.g)}, ${Math.floor(palette.Vibrant.b)}, 0.75)`
+        })
+      });
+
       this.setState({
         title: response.original_title,
         score: response.vote_average,
@@ -117,7 +125,7 @@ class MoviePage extends React.Component {
         return (
           <div className="movie-container">
             <div className="movie-backdrop" style={{backgroundImage: `url(${this.state.backdrop})`}}>
-                <div className="movie-backdrop-gradient">
+                <div className="movie-backdrop-color-overlay" style={{backgroundColor: this.state.backdropColor}}>
                 <div className="movie-info-container">
                   <div className="movie-poster" style={{backgroundImage: `url(${this.state.poster})`}}></div>
                   <div className="movie-text-info">

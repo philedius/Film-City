@@ -6,7 +6,7 @@ $grid-gap: 1.5rem;
 $icon-size: 36px;
 $filters-width: 250px;
 $primary: hsl(170, 80, 45);
-// $primary: hsl(190, 80, 45);
+$primary: #222;
 $primary-transparent: transparentize($primary, .2);
 $light: #fafafa;
 $secondary: #EDEBFA;
@@ -106,8 +106,8 @@ $font-family: 'Open Sans', sans-serif;
 }
 
 .sidebar-icons .icon:hover {
-  fill: $primary;
-  background-color: $light;
+  fill: $light;
+  background-color: $primary;
   cursor: pointer;
 }
 
@@ -275,13 +275,13 @@ body {
   background-position: 0 30%;
 }
 
-.movie-backdrop-gradient {
+.movie-backdrop-color-overlay {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: $primary-transparent;
+  // background: $primary-transparent;
 }
 
 .movie-info-container {
