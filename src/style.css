@@ -10,7 +10,7 @@
     color: #fafafa;
     padding: 1rem 2rem;
     text-align: center;
-    background: #222; }
+    background: blue; }
 
 .movie-card {
   display: flex;
@@ -77,7 +77,7 @@
 
 .sidebar-icons .icon:hover {
   fill: #fafafa;
-  background-color: #222;
+  background-color: blue;
   cursor: pointer; }
 
 .sidebar-icons .icon:active svg {
@@ -89,7 +89,7 @@
   opacity: 0;
   display: none;
   box-sizing: border-box;
-  background-color: #222;
+  background-color: blue;
   color: white;
   width: 11vw;
   height: 15.95vw;
@@ -176,7 +176,7 @@
   width: 100%;
   height: 2rem;
   background-color: #fafafa;
-  color: #222222;
+  color: #5326d9;
   text-align: center;
   user-select: none;
   cursor: pointer; }
@@ -200,7 +200,7 @@ body {
 #pagination span {
   font-size: 18px;
   margin: 0 .2rem;
-  background-color: #222;
+  background-color: blue;
   color: #fafafa;
   padding: .5rem 1rem;
   cursor: pointer;
@@ -208,7 +208,10 @@ body {
 
 .movie-container {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  opacity: 0;
+  transform: scale(0.99);
+  transition: opacity .5s ease, transform .4s ease-out; }
 
 .movie-backdrop {
   display: flex;
@@ -216,9 +219,9 @@ body {
   background: #fafafa;
   color: white;
   width: 100vw;
-  height: 550px;
+  height: 600px;
   background-size: cover;
-  background-position: 0 30%; }
+  background-position: 0 32.5%; }
 
 .movie-backdrop-color-overlay {
   display: flex;
@@ -230,7 +233,7 @@ body {
 .movie-info-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   width: 100%;
   max-width: 900px; }
@@ -249,27 +252,108 @@ body {
   max-width: 600px;
   color: white;
   line-height: 1.5;
-  text-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1); }
+  text-shadow: 0px 1px 7px rgba(0, 0, 0, 0.35); }
 
 .movie-text-info h1 {
-  font-size: 24px;
+  font-size: 32px;
   margin: 0; }
 
 .movie-overview {
   display: flex; }
 
 .movie-poster {
-  width: 250px;
-  min-width: 250px;
-  height: calc(250px * 1.45);
+  width: 225px;
+  min-width: 225px;
+  height: calc(225px * 1.45);
   background-size: cover;
   background-position: center;
-  box-shadow: 0 3px 20px rgba(9, 9, 9, 0.5);
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
   margin-right: 2rem; }
+
+.rating {
+  margin-right: 1rem; }
 
 .release-year {
   margin-left: 1rem;
   font-size: .75em; }
+
+input[type=range].slider {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 5.95px 0; }
+
+input[type=range].slider:focus {
+  outline: none; }
+
+input[type=range].slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4.1px;
+  cursor: pointer;
+  background: #ddd;
+  border-radius: 25px; }
+
+input[type=range].slider::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #444;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5.95px; }
+
+input[type=range].slider::-moz-range-track {
+  width: 100%;
+  height: 4.1px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px transparent, 0px 0px 0px rgba(13, 13, 13, 0);
+  background: #ddd;
+  border-radius: 25px;
+  border: 0px solid rgba(24, 61, 1, 0); }
+
+input[type=range].slider::-moz-range-thumb {
+  box-shadow: 2.6px 2.6px 3.7px rgba(0, 164, 0, 0), 0px 0px 2.6px rgba(0, 190, 0, 0);
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50px;
+  background: #444;
+  cursor: pointer; }
+
+input[type=range].slider::-ms-track {
+  width: 100%;
+  height: 4.1px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent; }
+
+input[type=range].slider::-ms-fill-lower {
+  background: rgba(62, 62, 62, 0.39);
+  border: 0px solid rgba(24, 61, 1, 0);
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px transparent, 0px 0px 0px rgba(13, 13, 13, 0); }
+
+input[type=range].slider::-ms-fill-upper {
+  background: rgba(126, 126, 126, 0.39);
+  border: 0px solid rgba(24, 61, 1, 0);
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px transparent, 0px 0px 0px rgba(13, 13, 13, 0); }
+
+input[type=range].slider::-ms-thumb {
+  box-shadow: 2.6px 2.6px 3.7px rgba(0, 164, 0, 0), 0px 0px 2.6px rgba(0, 190, 0, 0);
+  border: 0px solid rgba(134, 135, 132, 0);
+  height: 16px;
+  width: 16px;
+  border-radius: 50px;
+  background: #434443;
+  cursor: pointer;
+  height: 4.1px; }
+
+input[type=range].slider:focus::-ms-fill-lower {
+  background: rgba(126, 126, 126, 0.39); }
+
+input[type=range].slider:focus::-ms-fill-upper {
+  background: rgba(190, 190, 190, 0.39); }
 
 @media (max-width: 960px) {
   #container {

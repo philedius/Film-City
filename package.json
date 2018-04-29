@@ -6,6 +6,7 @@
     "@fortawesome/fontawesome": "latest",
     "@fortawesome/fontawesome-free-solid": "latest",
     "@fortawesome/react-fontawesome": "latest",
+    "axios": "^0.18.0",
     "moviedb": "^0.2.10",
     "node-sass-chokidar": "^1.1.0",
     "node-vibrant": "^3.0.0",
