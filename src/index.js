@@ -155,9 +155,13 @@ class MoviePage extends React.Component {
   }
   
   render() {
-        const Ratings = this.state.ratings.map((rating) => 
-        <span className="rating" key={rating.Source}>{rating.Value}</span>
-      );
+        const Ratings = this.state.ratings.map((rating) => {
+          let source;
+          if (rating.Source === 'Internet Movie Database') source = 'imdb-color';
+          if (rating.Source === 'Rotten Tomatoes') source = 'rottentomatoes-color';
+          if (rating.Source === 'Metacritic') source = 'metacritic-color';
+          return <span className={`rating ${source}`} key={rating.Source}>{rating.Value}</span>
+        });
         return (
           <div className="movie-container">
             <div className="movie-backdrop" style={{backgroundImage: `url(${this.state.backdrop})`}}>
@@ -187,7 +191,7 @@ class Home extends React.Component {
     return (
       <div id="container">
           <div id="header">
-            <input id="search" autoComplete="false" placeholder="Search for movies, actors / actresses, genres ..." />
+            <input id="search" autoComplete="off" placeholder="Search for movies, actors / actresses, genres ..." />
           </div>
           <Filters />
           <MovieGrid />

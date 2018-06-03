@@ -5,14 +5,9 @@ $min-height: $min-width * 1.45;
 $grid-gap: 1.5rem;
 $icon-size: 36px;
 $filters-width: 250px;
-$primary: hsl(170, 80, 45);
-$primary: blue;
-$primary-transparent: transparentize($primary, .2);
+$primary: hsl(170, 92%, 46%);
+$primary: rgb(255, 0, 55);
 $light: #fafafa;
-$secondary: #EDEBFA;
-$primary-dark: adjust-hue(desaturate($primary, 30%), 15deg);
-$filters: $light;
-$font-color: lighten($primary, 45%);
 $background-color: $light;
 $header-height: 100px;
 $font-family: 'Open Sans', sans-serif;
@@ -45,7 +40,7 @@ $font-family: 'Open Sans', sans-serif;
   background-position: center;
   background-size: cover;
   box-sizing: border-box;
-  flex-direction: column;
+  flex-direction: row;
   cursor: pointer;
   box-shadow: 0 0px 25px rgba(0, 0, 0, 0.1);
   transition: width .3s ease, height .3s ease;
@@ -54,42 +49,48 @@ $font-family: 'Open Sans', sans-serif;
 
 .movie-card:hover .sidebar {
   opacity: 1;
-  width: $icon-size;
-  transform: scale(1, 1);
+  transform: scale(1, 1) translate(0, 0);
 }
 
 .movie-card:hover .sidebar-icons {
   opacity: 1;
+  transform: translate(0, 0);
 }
 
 .sidebar {
-  fill: #222;
-  color: #222;
+  fill: white;
+  color: white;
   opacity: 0;
-  width: $icon-size;
-  min-width: 36px;
-  transform: scale(.25, .8);
-  margin-right: -($icon-size / 2);
-  margin-top: $icon-size / 2;
-  transform-origin: left;
+  width: 100%;
+  height: $icon-size * 1.1;
+  min-height: 36px * 1.1;
+  // margin-right: -($icon-size / 2);
+  // margin-top: $icon-size;
+  margin: 0 auto;
+  margin-bottom: 0;
+  transform-origin: center;
   text-align: center;
   background-color: $light;
+  background: none;
   align-self: flex-end;
-  transition: all 0.25s cubic-bezier(0, 0, 0.54, 1.10), opacity .15s ease-out;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s cubic-bezier(0, 0, 0.54, 1.10), opacity 0.2s ease-out;
+  // box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(360deg, rgba(0, 0, 0, .6) 0%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%);
 }
 
 .sidebar-icons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   opacity: 0;
+  transform: translateY(10px);
+  transition: transform .2s cubic-bezier(.11,.67,.59,1.21), opacity .125s ease-out;
 }
 
 .sidebar-icons a:visited,
 .sidebar-icons a-webkit-any-link:visited {
-  fill: #222 !important;
+  fill: white !important;
 }
 
 .icon {
@@ -100,14 +101,17 @@ $font-family: 'Open Sans', sans-serif;
   height: $icon-size;
   min-width: 36px;
   min-height: 36px;
+  transition: transform .1s ease-in-out;
 }
+
 .icon svg {
   transition: transform 0.2s cubic-bezier(0, 0, 0.54, 2)
 }
 
 .sidebar-icons .icon:hover {
   fill: $light;
-  background-color: $primary;
+  transform: translateY(-2px);
+  // background-color: $primary;
   cursor: pointer;
 }
 
@@ -198,6 +202,8 @@ $font-family: 'Open Sans', sans-serif;
 }
 
 #filter-components {
+  position: fixed;
+  max-width: $filters-width - 30px;
   margin: 1rem;
 }
 
@@ -217,25 +223,6 @@ $font-family: 'Open Sans', sans-serif;
   // margin: $grid-gap * 2;
   align-items: center;
   justify-content: space-evenly;
-}
-
-#home-logo {
-  width: 100%;
-  height: 2rem;
-  background-color: $light;
-  color: $primary-dark;
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
-}
-
-#home-logo:hover {
-  background-color: #bffae9;
-}
-
-#home-logo h1 {
-  margin: .4rem 0 0 0;
-  font-size: 18px;
 }
 
 body {
@@ -334,6 +321,27 @@ body {
 
 .rating {
   margin-right: 1rem;
+  padding: .1rem .5rem;
+  border-radius: 100px;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, .50);
+}
+
+.imdb-color {
+  background: #f5c518;
+  text-shadow: 0px 1px 10px rgba(25, 19, 0, 0.6);
+  box-shadow: 0 0px 10px rgba(245, 197, 24, 0.5);
+}
+
+.rottentomatoes-color {
+  background: #fa320a;
+  text-shadow: 0px 1px 10px rgba(54, 9, 0, 0.6);
+  box-shadow: 0 0px 10px rgba(250, 50, 10, .6);
+  
+}
+
+.metacritic-color {
+  background: #333;
+  box-shadow: 0 0px 10px rgba(51, 51, 51, 0.5);
 }
 
 .release-year {
