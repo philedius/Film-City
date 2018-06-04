@@ -44,6 +44,7 @@ class MovieGrid extends React.Component {
     mdb.discoverMovie({ with_genres: '80', page: this.state.currentPage, include_adult: false }, (error, response) => {
       if (!error) {
         this.currentItems = response.results;
+        console.log('this.currentItems: ', this.currentItems);
         this.incrementPage();
         this.updateGrid();
       } else {
@@ -122,13 +123,11 @@ class MoviePage extends React.Component {
           });
           for (let i = 0; i < res.data.Ratings.length; i++) {
             let rating = res.data.Ratings[i];
-            console.log(rating.Source, rating.Value);
           }
         })
         .catch((error) => {
           console.log(error);
         });
-        console.log(response);
         Vibrant.from('http://image.tmdb.org/t/p/w92' + response.poster_path).getPalette((err, palette) => {
           this.setState({
             backdropColor: getGradientFromPalette(palette)
