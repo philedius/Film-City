@@ -64,8 +64,6 @@ $font-family: 'Open Sans', sans-serif;
   width: 100%;
   height: $icon-size * 1.1;
   min-height: 36px * 1.1;
-  // margin-right: -($icon-size / 2);
-  // margin-top: $icon-size;
   margin: 0 auto;
   margin-bottom: 0;
   transform-origin: center;
@@ -74,7 +72,6 @@ $font-family: 'Open Sans', sans-serif;
   background: none;
   align-self: flex-end;
   transition: all 0.2s cubic-bezier(0, 0, 0.54, 1.10), opacity 0.25s ease-out;
-  // box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   background: linear-gradient(360deg, rgba(0, 0, 0, .6) 0%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%);
 }
 
